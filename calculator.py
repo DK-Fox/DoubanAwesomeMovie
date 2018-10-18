@@ -2,13 +2,13 @@
 import sys
 import csv
 from multiprocessing import Process
-import queue 
+import queue
 tbl=((0,0.03,0),(1500,0.1,105),(4500,0.2,555),(9000,0.25,1005),(35000,0.3,2755),(55000,0.35,5505),(80000,0.45,13505))
 
 class UserData():
 	def __init__(self,Userfile):
 		self._data=[]
-		with open(Userfile) as f: 
+		with open(Userfile) as f:
 			for data in csv.reader(f):
 				self._data.append(list(map(int,data)))
 
@@ -36,7 +36,7 @@ class UserData():
 
 	def Output(self,Outfile,result):
 		with open(Outfile,'w') as f:
-			csv.writer(f).writerows(list(result))			
+			csv.writer(f).writerows(list(result))
 
 class Shb():
 	def __init__(self,Shbfile):
@@ -50,11 +50,12 @@ class Shb():
 	def shb(self):
 		return self._shb
 
-def p1(q,opt):
-	q.put(UserData(opt))
-	
+def p1(q1,q2,opt):
+	q1.put(UserData(opt))
+    q2.put(UserData(opt))
+
 def p2(q1,q2,opt):
-	s=Shb(opt).shb	
+	s=Shb(opt).shb
 	try:
 		result=q1.get(timeout=5.0).calculate(s)
 	except queue.Empty:
@@ -72,14 +73,15 @@ if __name__=='__main__':
 	opt['-d']=args[args.index('-d')+1]
 	opt['-c']=args[args.index('-c')+1]
 	opt['-o']=args[args.index('-o')+1]
-	
+
 	q1=queue.Queue()
 	q2=queue.Queue()
+    q3=queue.Queue()
 
-	s1=Process(target=p1,args=(q1,opt['-d']))
+	s1=Process(target=p1,args=(q1,q3opt['-d']))
 	s2=Process(target=p2,args=(q1,q2,opt['-c']))
-	s3=Process(target=p3,args=(q1,q2,opt['-o']))
-	
+	s3=Process(target=p3,args=(q3,q2,opt['-o']))
+
 	for s in [s1,s2,s3]:
 		s.start()
 	for s in [s1,s2,s3]:
