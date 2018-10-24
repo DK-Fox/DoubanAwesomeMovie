@@ -1,11 +1,10 @@
-from flask import Flask,render_template
+from flask import Flask,render_template,abort
 import json
+import os
 
 app=Flask(__name__)
 
 JSON_DIR='/home/shiyanlou/files/'
-JSON_FILE1='helloshiyanlou.json'
-JSON_FILE2='helloworld.json'
 
 class Json():
     def __init__(self,filename):
@@ -18,17 +17,16 @@ class Json():
 
 @app.route('/')
 def index():
-    jd1=Json(JSON_DIR+JSON_FILE1).data
-    jd2=Json(JSON_DIR+JSON_FILE2).data
-    #jd=[jd1['title'],jd2['title']]
-    #return render_template('index.html',filenames=jd)
-    return jd1['title']+jd2['title']
+    jd=[]
+    print(os.listdir(JSON_DIR))
+    for file in os.listdir(JSON_DIR):
+        jd.append(Json(JSON_DIR+file).data['title'])
+    return render_template('index.html',filenames=jd)
 
 @app.route('/files/<filename>')
 def file(filename):
-    for jd in [JSON_FILE1,JSON_FILE2]:
-        if filename==jd.split('.')[0]:
-            return render_template('file.html',content=Json(JSON_DIR+jd).data['content'])
+    if filename+'.json' in os.listdir(JSON_DIR):
+        return render_template('file.html',content=Json(JSON_DIR+filename+'.json').data['content'])
     abort(404)
 
 @app.errorhandler(404)
