@@ -3,11 +3,15 @@ from flask_sqlalchemy import SQLAlchemy
 import json
 import os
 from datetime import datetime
+from pymongo import MongoClient
 
 app=Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=True
 app.config['SQLALCHEMY_DATABASE_URI']='mysql://root@localhost/news'
 db=SQLAlchemy(app)
+
+client=MongoClient('127.0.0.1',27017)
+m_db=client.webfiles
 
 JSON_DIR='/home/shiyanlou/files/'
 
@@ -36,6 +40,27 @@ class File(db.Model):
     def __expr__(self):
         return '<Title %r>'%self.title
 
+    def add_tag(self,tag_name):
+        tag=self.tags
+        tag.append(tag_name)
+        m_db.files.update_one({'title':self.title},{'$set':{'tag':tag}},upsert=True)
+
+    def remove_tag(self,tag_name):
+        tag=self.tags
+        if tag!=[]:
+            tag.remove(tag_name)
+            if tag==[]:
+                m_db.files.deleteOne({'tag':tag})
+            else:
+                m_db.files.update_one({'title':self.title},{'$set':{'tag':tag}})
+
+
+    @property
+    def tags(self):
+        tag=m_db.files.find_one({'title':self.title})
+        if tag!=None:
+            return tag['tag']
+        return []
 
 class Json():
     def __init__(self,filename):
@@ -49,6 +74,7 @@ class Json():
 @app.route('/')
 def index():
     files=File.query.all()
+    print(files[0].tags)
     return render_template('index.html',files=files)
 
 @app.route('/files/<file_id>')
