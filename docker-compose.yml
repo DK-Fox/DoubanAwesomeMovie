@@ -1,0 +1,17 @@
+version: "3"
+services:
+    web:
+        # replace username/repo:tag with your name and image details
+        image: website
+        ports:
+                - "5000:80"
+        volumes:
+                - $PWD/website:/app
+    mysql:
+        image: mysql
+        ports:
+            - "3306:3306"
+        volumes:
+            - $PWD/mysql/conf/my.cnf:/etc/mysql/my.cnf
+        environment:
+            - MYSQL_ROOT_PASSWORD=123456
