@@ -1,0 +1,17 @@
+version: "3"
+services:
+    crawl:
+        # replace username/repo:tag with your name and image details
+        image: crawl
+        container_name: crawl
+        volumes:
+            - $PWD/:/app
+        #ports:
+            #- "3333:3333"
+        command: python3 /app/LagouInf/LagouInf/models.py
+        networks:
+            - custom_net
+networks:
+    custom_net:
+        external:
+            name: app_net
