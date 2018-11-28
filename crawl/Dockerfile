@@ -2,7 +2,7 @@
 FROM python
 
 # Set the working directory to /app
-WORKDIR /app/LagouInf
+WORKDIR /app/douban_movie
 
 # Copy the current directory contents into the container at /app
 COPY . /app

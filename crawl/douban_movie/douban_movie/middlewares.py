@@ -1,14 +1,8 @@
 # -*- coding: utf-8 -*-
-
-# Define here the models for your spider middleware
-#
-# See documentation in:
-# https://doc.scrapy.org/en/latest/topics/spider-middleware.html
-
 import random
 from scrapy.downloadermiddlewares.useragent import UserAgentMiddleware as _UserAgentMiddleware
 
-class LagouinfSpiderMiddleware(_UserAgentMiddleware):
+class UserAgentMiddleware(_UserAgentMiddleware):
     user_agent_list = [
         "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 "
         "(KHTML, like Gecko) Chrome/22.0.1207.1 Safari/537.1",
@@ -48,6 +42,7 @@ class LagouinfSpiderMiddleware(_UserAgentMiddleware):
         "(KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24"
     ]
 
-    def process_request(self,request,spider):
+
+    def process_request(self, request, spider):
         ua=random.choice(self.user_agent_list)
         request.headers.setdefault('User-Agent',ua)

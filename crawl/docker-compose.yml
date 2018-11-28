@@ -6,9 +6,9 @@ services:
         container_name: crawl
         volumes:
             - $PWD/:/app
-        #ports:
-            #- "3333:3333"
-        command: python3 /app/LagouInf/LagouInf/models.py
+        command:  scrapy crawl awesome-movie
+        #python3 /app/douban_movie/douban_movie/models.py
+        #ping mymysql
         networks:
             - custom_net
 networks:

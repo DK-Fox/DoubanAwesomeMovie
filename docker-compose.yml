@@ -17,6 +17,7 @@ services:
             - "3306:3306"
         volumes:
             - $PWD/mysql/conf/my.cnf:/etc/mysql/my.cnf
+            - $PWD/mysql/data:/var/lib/mysql/douban_movie
         environment:
             - MYSQL_ROOT_PASSWORD=123456
         networks:
