@@ -12,13 +12,13 @@ RUN apt-get install default-libmysqlclient-dev
 RUN pip3 install -r requirements.txt
 
 # Make port 80 available to the world outside this container
-EXPOSE 80
+#EXPOSE 80
 
 # Define environment variable
-ENV http_proxy localhost:5000
-ENV https_proxy localhost:5000
-ENV FLASK_APP app.py
-ENV FLASK_DEBUG 1
+#ENV http_proxy localhost:5000
+#ENV https_proxy localhost:5000
+#ENV FLASK_APP app.py
+#ENV FLASK_DEBUG 1
 
 # Run app.py when the container launches
-CMD ["python3", "app.py"]
+#CMD ["python3", "app.py"]

@@ -6,8 +6,8 @@ services:
         container_name: crawl
         volumes:
             - $PWD/:/app
-        command:  scrapy crawl awesome-movie
-        #python3 /app/douban_movie/douban_movie/models.py
+        command: python3 /app/douban_movie/douban_movie/models.py
+        #scrapy crawl awesome-movie 
         #ping mymysql
         networks:
             - custom_net

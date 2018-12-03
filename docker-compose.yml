@@ -10,6 +10,7 @@ services:
             - $PWD/website:/app
         networks:
             - custom_net
+        command: python3 app.py
     mysql:
         image: mysql
         container_name: mymysql
@@ -20,6 +21,16 @@ services:
             - $PWD/mysql/data:/var/lib/mysql/douban_movie
         environment:
             - MYSQL_ROOT_PASSWORD=123456
+        #command: ls /var/lib/mysql/douban_movie
+        networks:
+            - custom_net
+    redis:
+        image: redis
+        container_name: redis
+        ports:
+            - "6379:6379"
+        volumes:
+            - "$PWD/redis/data:/data"
         networks:
             - custom_net
 networks:
