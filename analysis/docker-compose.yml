@@ -7,7 +7,7 @@ services:
         volumes:
             - $PWD:/app
             - $PWD/../website/static/img/:/app/img/
-            - $PWD/matplotlibrc:/usr/local/lib/python3.7/site-packages/matplotlib/mpl-data/matplotlibrc
+            #- $PWD/matplotlibrc:/usr/local/lib/python3.7/site-packages/matplotlib/mpl-data/matplotlibrc
         command: python3 app.py
         #python3 /app/douban_movie/douban_movie/models.py
         #ping mymysql

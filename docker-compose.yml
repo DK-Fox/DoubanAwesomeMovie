@@ -10,6 +10,8 @@ services:
             - $PWD/website:/app
         networks:
             - custom_net
+        environment:
+            - FLASK_DEBUG=1
         command: python3 app.py
     mysql:
         image: mysql
