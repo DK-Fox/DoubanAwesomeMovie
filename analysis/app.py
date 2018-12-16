@@ -55,11 +55,8 @@ class FromDBDataGenerateIMG(object):
         other=barh1[rate].sum()
         barh1=barh1[~rate]
         barh1['其他']=other
-        print(barh1)
 
         y_pos = np.arange(len(barh1))
-        print(y_pos)
-        print(list(barh1.index))
         fig3,ax3=plt.subplots()
         ax3.barh(y_pos,barh1,align="center",color='green',ecolor='black')
         ax3.set_yticks(y_pos)

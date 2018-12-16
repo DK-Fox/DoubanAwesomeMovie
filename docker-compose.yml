@@ -12,7 +12,8 @@ services:
             - custom_net
         environment:
             - FLASK_DEBUG=1
-        command: python3 app.py
+            #- FLASK_APP=manage.py
+        command: python3 manage.py
     mysql:
         image: mysql
         container_name: mymysql
@@ -20,10 +21,10 @@ services:
             - "3306:3306"
         volumes:
             - $PWD/mysql/conf/my.cnf:/etc/mysql/my.cnf
-            - $PWD/mysql/data:/var/lib/mysql/douban_movie
+            #- $PWD/mysql/data:/var/lib/mysql/douban_movie
         environment:
             - MYSQL_ROOT_PASSWORD=123456
-        #command: ls /var/lib/mysql/douban_movie
+        #command: python3 manage.py db migrate
         networks:
             - custom_net
     redis:

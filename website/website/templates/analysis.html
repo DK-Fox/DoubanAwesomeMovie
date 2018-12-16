@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Analysis{% endblock %}
+
+{% block body %}
+     <div class="row">
+      <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+          <img src="{{ url_for('static',filename='img/pie.png') }}" alt=" 地区比例：">
+          <div class="caption">
+            <h3> 地区比例：</h3>
+          </div>
+        </div>
+        <div class="thumbnail">
+          <img src="{{ url_for('static',filename='img/plot.png') }}" alt=" 时间增长：">
+          <div class="caption">
+            <h3> 时间增长：</h3>
+          </div>
+        </div>
+        <div class="thumbnail">
+          <img src="{{ url_for('static',filename='img/barh.png') }}" alt=" 类型数量对比：">
+          <div class="caption">
+            <h3> 类型数量对比：</h3>
+          </div>
+        </div>
+      </div>
+    </div>   
+{% endblock %}

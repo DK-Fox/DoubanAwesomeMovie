@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% from "macro.html" import render_pagination %}
+{% block title  %}Index{% endblock  %}
+
+{% block body %}
+{% for movie  in pagination.items %}
+<li class="list-group-item"><a href="{{ url_for('movie.page_movies',id=movie.id) }}">{{ movie.name }}  {{ movie.year }}</a></li>
+{% endfor %}
+
+{{ render_pagination(pagination, 'movie.index')}}
+{% endblock %}

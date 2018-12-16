@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title  %}Index{% endblock  %}
+
+{% block body %}
+<div class="jumbotron">
+    <h1>豆瓣电影摘录</h1>
+    <p>这是一个Demo</p>
+    <p><a class="btn btn-primary btn-lg" href="{{ url_for('movie.index') }}" role="button">Start</a></p>
+</div>
+
+{% endblock %}

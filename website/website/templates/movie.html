@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}movie{% endblock %}
+
+{% block body %}
+<div class="page-header">
+    <h1><a href="{{ movie.url }}" >{{ movie.name }} {{ movie.year }}</a></h1>
+</div>
+<ul class="list-group">
+    <li class="list-group-item">评分: {{ movie.score }}</li>
+    <li class="list-group-item">类型: {{ movie.type }}</li>
+    <li class="list-group-item">地区: {{ movie.location }}</li>
+    <li class="list-group-item">简介: {{ movie.summary }}</li>
+</ul>
+{% endblock %}
